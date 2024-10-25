@@ -3,7 +3,7 @@
 // IDE used: Visual Studio Code for Mac
 
 // In this program, each of the 3 data structures will have its own separate function for each individual race task, for purposes of clarity
-// To add new races, all you would need to do is create more functions for the race task you want to add and add more timing code blocks/output statements in main()
+// To add new races, all you would need to do is create more functions for the race task you want to add + add more timing code blocks/output statements in main()
 
 /* syntax examples:
 auto start = high_resolution_clock::now()
@@ -71,7 +71,7 @@ int main()
 
     // code block #2, race #2: time how long it takes to sort each data structure
     // set will not be participating in this race because it already automatically sorts elements
-    // set will have a placeholder of -1 for the sort duration when we output the results of the race
+    // set will have a placeholder of -1 for the sort duration when we output the results of the races
     // contestant #1: vector
     auto startVectorSort = high_resolution_clock::now(); // start stopwatch
     vectorSort(vectorContestant); // vectorSort() function call, will sort the data elements within the vector (according to ASCII)
@@ -102,6 +102,22 @@ int main()
 
     // code block #4, race #4: time how long it takes to delete the middle element of each data structure
     // contestant #1: vector
+    auto startVectorDelete = high_resolution_clock::now(); // start stopwatch
+    vectorDelete(vectorContestant); // vectorDelete() function call, will delete the middle element of the vector
+    auto endVectorDelete = high_resolution_clock::now(); // stop stopwatch after function call
+    auto durationVectorDelete = duration_cast<milliseconds>(endVectorDelete - startVectorDelete); // calculate the time it took
+    // contestant #2: list
+    auto startListDelete = high_resolution_clock::now(); // start stopwatch
+    listDelete(listContestant); // listDelete() function call, will delete the middle element of the list
+    auto endListDelete = high_resolution_clock::now(); // stop stopwatch after function call
+    auto durationListDelete = duration_cast<milliseconds>(endListDelete - startListDelete); // calculate the time it took
+    // contestant #3: set
+    auto startSetDelete = high_resolution_clock::now(); // start stopwatch
+    setDelete(setContestant); // setDelete() function call, will delete the middle element of the set
+    auto endsetDelete = high_resolution_clock::now(); // stop stopwatch after function call
+    auto durationsetDelete = duration_cast<milliseconds>(endsetDelete - startSetDelete); // calculate the time it took
+
+    // output the results of the races
 
     return 0;
 }
@@ -261,7 +277,7 @@ void setInsert(set<string>& set, string value)
 }
 
 // void vectorDelete(vector<string>& vector) function header
-// DESCRIPTION: this function deletes the middle element of the vector
+// DESCRIPTION: this function deletes the middle element in the vector
 // ARGUMENTS: vector<string>& vector, which represents the vector container that holds string data elements
 // - passing by reference because the vector will be modified
 // RETURNS: nothing, void function
@@ -277,7 +293,7 @@ void vectorDelete(vector<string>& vector)
 }
 
 // void listDelete(list<string>& list) function header
-// DESCRIPTION: this function deletes the middle element of the list
+// DESCRIPTION: this function deletes the middle element in the list
 // ARGUMENTS: list<string>& list, which represents the list container that holds string data elements
 // - passing by reference because the list will be modified
 // RETURNS: nothing, void function
@@ -300,7 +316,7 @@ void listDelete(list<string>& list)
 }
 
 // void setDelete(set<string>& set) function header
-// DESCRIPTION: this function deletes the middle element of the set
+// DESCRIPTION: this function deletes the middle element in the set
 // ARGUMENTS: set<string>& set, which represents the set container that holds string data elements
 // - passing by reference because the set will be modified
 // RETURNS: nothing, void function
