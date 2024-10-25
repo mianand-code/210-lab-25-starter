@@ -21,6 +21,7 @@ duration.count() references elapsed milliseconds
 #include <string>
 #include <vector> // to use std::vector
 using namespace std;
+using namespace std::chrono; // to use time features
 
 // function prototypes
 // race task #1: reading
@@ -42,7 +43,20 @@ void setDelete(set<string>&);
 
 int main() 
 {
-    
+    string fileName = "codes.txt"; // to hold the name of the input file to read data elements from
+    int durationSetSort = -1; // since std::set automatically sorts on its own, we are using -1 as a placeholder for the sort duration
+    string value = "TESTCODE"; // this is the value we will be using for our inserting race
+
+    // creation of the 3 data structure contestants for the races
+    vector<string> vectorContestant;
+    list<string> listContestant;
+    set<string> setContestant;
+
+    // code block #1, race #1: time how long it takes to read data elements into each data structure
+    // contestant #1: vector
+    auto starVectorRead = high_resolution_clock::now(); // start stopwatch
+    vectorRead(fileName, vectorContestant); // vectorRead() function call, will read data elements from the input file into the vector
+    auto end = high_resolution_clock::now();
 
     return 0;
 }
@@ -245,3 +259,20 @@ void listDelete(list<string>& list)
 // ARGUMENTS: set<string>& set, which represents the set container that holds string data elements
 // - passing by reference because the set will be modified
 // RETURNS: nothing, void function
+void setDelete(set<string>& set)
+{
+    // using C++ "auto" keyword to create an iterator
+    // using .begin() member function to initialize the iterator to start at the beginning of the set
+    auto it = set.begin(); 
+    // declaration and initialization of a variable named "middle"
+    // this variable holds the position of the middle element within the set
+    // the middle element is calculated by taking the size (.size()) of the set & dividing it by 2
+    int middle = set.size() / 2;
+
+    for (int i = 0; i < middle; i++) // using a for loop to advance the iterator to the position where we want to delete the value
+    {
+        it++;
+    }
+
+    set.erase(it); // using .erase() member function to delete the value at the position of the iterator
+}
