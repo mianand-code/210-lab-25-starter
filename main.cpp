@@ -136,3 +136,34 @@ void vectorSort(vector<string>& vector)
 {
     sort(vector.begin(), vector.end()); // using sort member function to sort the contents of the vector from beginning to end
 }
+
+// void listSort(list<string>& list) function header
+// DESCRIPTION: this function sorts the elements within the list
+// since the data elements are string codes/IDs, they will be sorted according to ASCII
+// ARGUMENTS: list<string>& list, which represents the list container that holds string data elements
+// - passing by reference because the list will be modified
+// RETURNS: nothing, void function
+void listSort(list<string>& list)
+{
+    list.sort(); // using .sort() member function to sort the contents of the list
+}
+
+// void vectorInsert(vector<string>& vector, string value) function header
+// DESCRIPTION: this function will insert a value into the middle of the vector
+// ARGUMENTS: vector<string>& vector, which represents the vector container that holds string data elements
+// - passing by reference because the vector will be modified
+// - string value, which represents the value to be inserted
+// RETURNS: nothing, void function
+void vectorInsert(vector<string>& vector, string value)
+{
+    // using C++ "auto" keyword to create an iterator
+    // the iterator starts at the beginning (.begin()) of the vector and progresses to the middle element
+    // the middle element is calculated by taking the size (.size()) of the vector & dividing it by 2
+    // this process causes the iterator to move to the middle position
+    auto it = vector.begin() + vector.size() / 2;
+
+    vector.insert(it, value); // using .insert() member function to insert the value at the position of the iterator
+}
+
+// void listInsert(list<string>& list, string value) function header
+// DESCRIP
