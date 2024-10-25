@@ -190,8 +190,58 @@ void listInsert(list<string>& list, string value)
 }
 
 // void setInsert(set<string>& set, string value) function header
-// DESCRIPTION:
+// DESCRIPTION: this function will insert a value into the set
+// - std::set orders/sorts automatically, so inserting into the middle position does not apply here. The value will be placed in the correct position automatically
 // ARGUMENTS: set<string>& set, which represents the set container that holds string data elements
 // - passing by reference because the set will be modified
 // - string value, which represents the value to be inserted
+// RETURNS: nothing, void function
+void setInsert(set<string>& set, string value)
+{
+    set.insert(value); // using the .insert() member function to insert the value into the set
+}
+
+// void vectorDelete(vector<string>& vector) function header
+// DESCRIPTION: this function deletes the middle element of the vector
+// ARGUMENTS: vector<string>& vector, which represents the vector container that holds string data elements
+// - passing by reference because the vector will be modified
+// RETURNS: nothing, void function
+void vectorDelete(vector<string>& vector)
+{
+    // using C++ "auto" keyword to create an iterator
+    // the iterator starts at the beginning (.begin()) of the vector and progresses to the middle element
+    // the middle element is calculated by taking the size (.size()) of the vector & dividing it by 2
+    // this process causes the iterator to move to the middle position
+    auto it = vector.begin() + vector.size() / 2;
+
+    vector.erase(it); // using .erase() member function to delete the value at the position of the iterator
+}
+
+// void listDelete(list<string>& list) function header
+// DESCRIPTION: this function deletes the middle element of the list
+// ARGUMENTS: list<string>& list, which represents the list container that holds string data elements
+// - passing by reference because the list will be modified
+// RETURNS: nothing, void function
+void listDelete(list<string>& list)
+{
+    // using C++ "auto" keyword to create an iterator
+    // using .begin() member function to initialize the iterator to start at the beginning of the list
+    auto it = list.begin(); 
+    // declaration and initialization of a variable named "middle"
+    // this variable holds the position of the middle element within the list
+    // the middle element is calculated by taking the size (.size()) of the list & dividing it by 2
+    int middle = list.size() / 2;
+
+    for (int i = 0; i < middle; i++) // using a for loop to advance the iterator to the position where we want to delete the value
+    {
+        it++;
+    }
+
+    list.erase(it); // using .erase() member function to delete the value at the position of the iterator
+}
+
+// void setDelete(set<string>& set) function header
+// DESCRIPTION: this function deletes the middle element of the set
+// ARGUMENTS: set<string>& set, which represents the set container that holds string data elements
+// - passing by reference because the set will be modified
 // RETURNS: nothing, void function
