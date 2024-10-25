@@ -28,6 +28,7 @@ void vectorRead(const string, vector<string>&);
 void listRead(const string, list<string>&);
 void setRead(const string, set<string>&);
 // race task #2: sorting
+// std::set does not need a function to sort since it does this automatically
 void vectorSort(vector<string>&);
 void listSort(list<string>&);
 // race task #3: inserting
@@ -47,7 +48,7 @@ int main()
 }
 
 // void vectorRead(const string codesFile, vector<string>& vector) function header
-// DESCRIPTION: this function reads data elements from the input file into the vector (using .push_back(), which adds elements to the end of the vector)
+// DESCRIPTION: this function reads data elements from the input file and adds them to the vector (using .push_back(), which adds elements to the end of the vector)
 // - the function ensures that the input file was successfully opened before proceeding
 // ARGUMENTS: const string codesFile, which represents the input file to read data elements from. Using const to signify that the input file should not be modified
 // - vector<string>& vector, which represents the vector container that will hold string data elements
@@ -73,7 +74,7 @@ void vectorRead(const string codesFile, vector<string>& vector)
 }
 
 // void listRead(const string codesFile, list<string>& list) function header
-// DESCRIPTION: this function reads data elements from the input file into the list (using .push_back(), which adds elements to the end of the list)
+// DESCRIPTION: this function reads data elements from the input file and adds them to the list (using .push_back(), which adds elements to the end of the list)
 // - the function ensures that the input file was successfully opened before proceeding
 // ARGUMENTS: const string codesFile, which represents the input file to read data elements from. Using const to signify that the input file should not be modified
 // - list<string>& list, which represents the list container that will hold string data elements
@@ -99,7 +100,8 @@ void listRead(const string codesFile, list<string>& list)
 }
 
 // void setRead(const string codesFile, set<string>& set) function header
-// DESCRIPTION: this function reads data elements from the input file
+// DESCRIPTION: this function reads data elements from the input file and inserts them into the set
+// - using .insert(), which inserts elements into the set. Set ensures that elements are ordered/sorted automatically
 // - the function ensures that the input file was successfully opened before proceeding
 // ARGUMENTS: const string codesFile, which represents the input file to read data elements from. Using const to signify that the input file should not be modified
 // - set<string>& set, which represents the set container that will hold string data elements
@@ -107,5 +109,30 @@ void listRead(const string codesFile, list<string>& list)
 // RETURNS: nothing, void function
 void setRead(const string codesFile, set<string>& set)
 {
+    string setCodes; // to hold a code/ID from the input file
+    ifstream fin(codesFile); // creation of an ifstream (input file) object
 
+    if (!fin) // check if there was an error when opening the input file
+    {
+        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location & try again." << endl;
+        return; // exit function
+    }
+
+    while (fin >> setCodes) // reading codes/IDs from the file into the set
+    {
+        set.insert(setCodes); // using .insert() member function to insert codes/IDs from the input file into the set container
+    }
+
+    fin.close(); // close input file
+}
+
+// void vectorSort(vector<string>& vector) function header
+// DESCRIPTION: this function sorts the elements within the vector
+// since the data elements are string codes/IDs, they will be sorted according to ASCII
+// ARGUMENTS: vector<string>& vector, which represents the vector container that holds string data elements
+// - passing by reference because the vector will be modified
+// RETURNS: nothing, void function
+void vectorSort(vector<string>& vector)
+{
+    sort(vector.begin(), vector.end()); // using sort member function to sort the contents of the vector from beginning to end
 }
