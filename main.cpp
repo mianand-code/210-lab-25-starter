@@ -1,8 +1,13 @@
+// COMSC-210 | Lab 25 | Mira Anand
+// Module 9, Lesson: std::list & std::set, Assignment: Data Structures Races
+// IDE used: Visual Studio Code for Mac
+
 #include <iostream>
 #include <chrono>
 using namespace std;
 
-int main() {
+int main() 
+{
     
 
     return 0;
