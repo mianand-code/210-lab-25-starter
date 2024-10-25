@@ -166,4 +166,32 @@ void vectorInsert(vector<string>& vector, string value)
 }
 
 // void listInsert(list<string>& list, string value) function header
-// DESCRIP
+// DESCRIPTION: this function will insert a value into the middle of the list
+// ARGUMENTS: list<string>& list, which represents the list container that holds string data elements
+// - passing by reference because the list will be modified
+// - string value, which represents the value to be inserted
+// RETURNS: nothing, void function
+void listInsert(list<string>& list, string value)
+{
+    // using C++ "auto" keyword to create an iterator
+    // using .begin() member function to initialize the iterator to start at the beginning of the list
+    auto it = list.begin(); 
+    // declaration and initialization of a variable named "middle"
+    // this variable holds the position of the middle element within the list
+    // the middle element is calculated by taking the size (.size()) of the list & dividing it by 2
+    int middle = list.size() / 2;
+
+    for (int i = 0; i < middle; i++) // using a for loop to advance the iterator to the position where we want to insert the value
+    {
+        it++;
+    }
+
+    list.insert(it, value); // using .insert() member function to insert the value at the position of the iterator
+}
+
+// void setInsert(set<string>& set, string value) function header
+// DESCRIPTION:
+// ARGUMENTS: set<string>& set, which represents the set container that holds string data elements
+// - passing by reference because the set will be modified
+// - string value, which represents the value to be inserted
+// RETURNS: nothing, void function
