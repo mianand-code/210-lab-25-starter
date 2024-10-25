@@ -47,8 +47,11 @@ int main()
 }
 
 // void vectorRead(const string codesFile, vector<string>& vector) function header
-// DESCRIPTION: this function reads data elements from the input file into the vector data structure
-// ARGUMENTS:
+// DESCRIPTION: this function reads data elements from the input file into the vector (using .push_back(), which adds elements to the end of the vector)
+// - the function ensures that the input file was successfully opened before proceeding
+// ARGUMENTS: const string codesFile, which represents the input file to read data elements from. Using const to signify that the input file should not be modified
+// - vector<string>& vector, which represents the vector container that will hold string data elements
+// - passing by reference because the vector will be modified
 // RETURNS: nothing, void function
 void vectorRead(const string codesFile, vector<string>& vector)
 {
@@ -67,4 +70,42 @@ void vectorRead(const string codesFile, vector<string>& vector)
     }
 
     fin.close(); // close input file
+}
+
+// void listRead(const string codesFile, list<string>& list) function header
+// DESCRIPTION: this function reads data elements from the input file into the list (using .push_back(), which adds elements to the end of the list)
+// - the function ensures that the input file was successfully opened before proceeding
+// ARGUMENTS: const string codesFile, which represents the input file to read data elements from. Using const to signify that the input file should not be modified
+// - list<string>& list, which represents the list container that will hold string data elements
+// - passing by reference because the list will be modified
+// RETURNS: nothing, void function
+void listRead(const string codesFile, list<string>& list)
+{
+    string listCodes; // to hold a code/ID from the input file
+    ifstream fin(codesFile); // creation of an ifstream (input file) object
+
+    if (!fin) // check if there was an error when opening the input file
+    {
+        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location & try again." << endl;
+        return; // exit function
+    }
+
+    while (fin >> listCodes) // reading codes/IDs from the file into the list
+    {
+        list.push_back(listCodes); // using .push_back() member function to add codes/IDs from the input file to the end of the list container
+    }
+
+    fin.close(); // close input file
+}
+
+// void setRead(const string codesFile, set<string>& set) function header
+// DESCRIPTION: this function reads data elements from the input file
+// - the function ensures that the input file was successfully opened before proceeding
+// ARGUMENTS: const string codesFile, which represents the input file to read data elements from. Using const to signify that the input file should not be modified
+// - set<string>& set, which represents the set container that will hold string data elements
+// - passing by reference because the set will be modified
+// RETURNS: nothing, void function
+void setRead(const string codesFile, set<string>& set)
+{
+
 }
