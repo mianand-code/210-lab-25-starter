@@ -54,9 +54,27 @@ int main()
 
     // code block #1, race #1: time how long it takes to read data elements into each data structure
     // contestant #1: vector
-    auto starVectorRead = high_resolution_clock::now(); // start stopwatch
+    auto startVectorRead = high_resolution_clock::now(); // start stopwatch
     vectorRead(fileName, vectorContestant); // vectorRead() function call, will read data elements from the input file into the vector
-    auto end = high_resolution_clock::now();
+    auto endVectorRead = high_resolution_clock::now(); // stop stopwatch after function call
+    auto durationVectorRead = duration_cast<milliseconds>(endVectorRead - startVectorRead); // calculate the time it took
+    // contestant #2: list
+    auto startListRead = high_resolution_clock::now(); // start stopwatch
+    listRead(fileName, listContestant); // listRead() function call, will read data elements from the input file into the list
+    auto endListRead = high_resolution_clock::now(); // stop stopwatch after function call
+    auto durationListRead = duration_cast<milliseconds>(endListRead - startListRead); // calculate the time it took
+    // contestant #3: set
+    auto startSetRead = high_resolution_clock::now(); // start stopwatch
+    setRead(fileName, setContestant); // setRead() function call, will read data elements from the input file into the set
+    auto endsetRead = high_resolution_clock::now(); // stop stopwatch after function call
+    auto durationsetRead = duration_cast<milliseconds>(endsetRead - startSetRead); // calculate the time it took
+
+    // code block #2, race #2: time how long it takes to sort each data structure
+    // set will not be participating in this race because it automatically sorts elements
+    // set will have a placeholder of -1 for the sort duration when we output the results of the race
+    // contestant #1: vector
+    auto startVectorSort = high_resolution_clock::now(); // start stopwatch
+    vectorSort(vectorContestant); // vectorSort() function call, will sort the data elements within the vector (according to ASCII)
 
     return 0;
 }
