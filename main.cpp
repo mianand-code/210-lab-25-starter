@@ -15,6 +15,7 @@ duration.count() references elapsed milliseconds
 #include <algorithm> // to use std::vector member functions
 #include <chrono> // to use time features
 #include <fstream> // needed for file operations
+#include <iomanip> // to use setw()
 #include <iostream>
 #include <list> // to use std::list
 #include <set> // to use std::set
@@ -22,6 +23,8 @@ duration.count() references elapsed milliseconds
 #include <vector> // to use std::vector
 using namespace std;
 using namespace std::chrono; // to use time features
+
+const int WIDTH = 12; // to neatly format output (results of races)
 
 // function prototypes
 // race task #1: reading
@@ -118,6 +121,12 @@ int main()
     auto durationsetDelete = duration_cast<milliseconds>(endsetDelete - startSetDelete); // calculate the time it took
 
     // output the results of the races
+    // using .count() to reference elapsed milliseconds
+    cout << setw(12) << "Operation" << setw(WIDTH) << "Vector" << setw(WIDTH) << "List" << setw(WIDTH) << "Set" << endl;
+    cout << setw(WIDTH) << "Read" << setw(WIDTH) << durationVectorRead.count() << setw(WIDTH) << durationListRead.count() << setw(WIDTH) << durationsetRead.count() << endl;
+    cout << setw(WIDTH) << "Sort" << setw(WIDTH) << durationVectorSort.count() << setw(WIDTH) << durationListSort.count() << setw(WIDTH) << durationSetSort << endl; // -1 placeholder for set
+    cout << setw(WIDTH) << "Insert" << setw(WIDTH) << durationVectorInsert.count() << setw(WIDTH) << durationListInsert.count() << setw(WIDTH) << durationsetInsert.count() << endl;
+    cout << setw(WIDTH) << "Delete" << setw(WIDTH) << durationVectorDelete.count() << setw(WIDTH) << durationListDelete.count()<< setw(WIDTH) << durationsetDelete.count() << endl; 
 
     return 0;
 }
