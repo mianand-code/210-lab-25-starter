@@ -87,38 +87,52 @@ int main()
     auto durationListSort = duration_cast<milliseconds>(endListSort - startListSort); // calculate the time it took
 
     // code block #3, race #3: time how long it takes to insert the value "TESTCODE" into the middle of the vector & list, & into the correct sorted position within the set
+    // this code block uses the .size() member function to ensure that insertion is actually being performed
     // contestant #1: vector
+    cout << "Size of the vector before insertion: " << vectorContestant.size() << endl;
     auto startVectorInsert = high_resolution_clock::now(); // start stopwatch
     vectorInsert(vectorContestant, value); // vectorInsert() function call, will insert the specified value into the middle of the vector
     auto endVectorInsert = high_resolution_clock::now(); // stop stopwatch after function call
     auto durationVectorInsert = duration_cast<milliseconds>(endVectorInsert - startVectorInsert); // calculate the time it took
+    cout << "Size of the vector after insertion: " << vectorContestant.size() << endl << endl;
     // contestant #2: list
+    cout << "Size of the list before insertion: " << listContestant.size() << endl;
     auto startListInsert = high_resolution_clock::now(); // start stopwatch
     listInsert(listContestant, value); // listInsert() function call, will insert the specified value into the middle of the list
     auto endListInsert = high_resolution_clock::now(); // stop stopwatch after function call
     auto durationListInsert = duration_cast<milliseconds>(endListInsert - startListInsert); // calculate the time it took
+    cout << "Size of the list after insertion: " << listContestant.size() << endl << endl;
     // contestant #3: set
+    cout << "Size of the set before insertion: " << setContestant.size() << endl;
     auto startSetInsert = high_resolution_clock::now(); // start stopwatch
     setInsert(setContestant, value); // setInsert() function call, will insert the specified value into the correct sorted position within the set
     auto endsetInsert = high_resolution_clock::now(); // stop stopwatch after function call
     auto durationsetInsert = duration_cast<milliseconds>(endsetInsert - startSetInsert); // calculate the time it took
+    cout << "Size of the set after insertion: " << setContestant.size() << endl << endl;
 
     // code block #4, race #4: time how long it takes to delete the middle element of each data structure
+    // this code block uses the .size() member function to ensure that deletion is actually being performed
     // contestant #1: vector
+    cout << "Size of the vector before deletion: " << vectorContestant.size() << endl;
     auto startVectorDelete = high_resolution_clock::now(); // start stopwatch
     vectorDelete(vectorContestant); // vectorDelete() function call, will delete the middle element of the vector
     auto endVectorDelete = high_resolution_clock::now(); // stop stopwatch after function call
     auto durationVectorDelete = duration_cast<milliseconds>(endVectorDelete - startVectorDelete); // calculate the time it took
+    cout << "Size of the vector after deletion: " << vectorContestant.size() << endl << endl;
     // contestant #2: list
+    cout << "Size of the list before deletion: " << listContestant.size() << endl;
     auto startListDelete = high_resolution_clock::now(); // start stopwatch
     listDelete(listContestant); // listDelete() function call, will delete the middle element of the list
     auto endListDelete = high_resolution_clock::now(); // stop stopwatch after function call
     auto durationListDelete = duration_cast<milliseconds>(endListDelete - startListDelete); // calculate the time it took
+    cout << "Size of the list after deletion: " << listContestant.size() << endl << endl;
     // contestant #3: set
+    cout << "Size of the set before deletion: " << setContestant.size() << endl;
     auto startSetDelete = high_resolution_clock::now(); // start stopwatch
     setDelete(setContestant); // setDelete() function call, will delete the middle element of the set
     auto endsetDelete = high_resolution_clock::now(); // stop stopwatch after function call
     auto durationsetDelete = duration_cast<milliseconds>(endsetDelete - startSetDelete); // calculate the time it took
+    cout << "Size of the set after deletion: " << setContestant.size() << endl << endl;
 
     // output the results of the races
     // using .count() to reference elapsed milliseconds
