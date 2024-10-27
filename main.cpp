@@ -24,22 +24,22 @@ duration.count() references elapsed milliseconds
 using namespace std;
 using namespace std::chrono; // to use time features
 
-const int WIDTH = 12; // to neatly format output (results of races)
+const int WIDTH = 12; // to neatly format output (results of each race)
 
 // function prototypes
-// race task #1: reading
+// race #1: reading
 void vectorRead(const string, vector<string>&);
 void listRead(const string, list<string>&);
 void setRead(const string, set<string>&);
-// race task #2: sorting
+// race #2: sorting
 // std::set does not need a function to sort since it does this automatically
 void vectorSort(vector<string>&);
 void listSort(list<string>&);
-// race task #3: inserting
+// race #3: inserting
 void vectorInsert(vector<string>&, string);
 void listInsert(list<string>&, string);
 void setInsert(set<string>&, string);
-// race task #4: deleting
+// race #4: deleting
 void vectorDelete(vector<string>&);
 void listDelete(list<string>&);
 void setDelete(set<string>&);
@@ -47,8 +47,8 @@ void setDelete(set<string>&);
 int main() 
 {
     string fileName = "codes.txt"; // to hold the name of the input file to read data elements from
-    int durationSetSort = -1; // since std::set automatically sorts on its own, we are using -1 as a placeholder for the sort duration
-    string value = "TESTCODE"; // this is the value we will be using for our inserting race
+    int durationSetSort = -1; // since std::set automatically sorts on its own, we are using -1 as a placeholder for the sort duration when outputting results for the sorting race
+    string value = "TESTCODE"; // this is the value we will be inserting into each data structure for our inserting race
 
     // creation of the 3 data structure contestants for the races
     vector<string> vectorContestant;
@@ -69,12 +69,12 @@ int main()
     // contestant #3: set
     auto startSetRead = high_resolution_clock::now(); // start stopwatch
     setRead(fileName, setContestant); // setRead() function call, will read data elements from the input file into the set
-    auto endsetRead = high_resolution_clock::now(); // stop stopwatch after function call
-    auto durationsetRead = duration_cast<milliseconds>(endsetRead - startSetRead); // calculate the time it took
+    auto endSetRead = high_resolution_clock::now(); // stop stopwatch after function call
+    auto durationSetRead = duration_cast<milliseconds>(endSetRead - startSetRead); // calculate the time it took
 
     // code block #2, race #2: time how long it takes to sort each data structure
-    // set will not be participating in this race because it already automatically sorts elements
-    // set will have a placeholder of -1 for the sort duration when we output the results of the races
+    // std::set will not be participating in this race because this data structure automatically sorts elements on its own
+    // std::set will have a placeholder of -1 for the sort duration when we output the results for the sorting race
     // contestant #1: vector
     auto startVectorSort = high_resolution_clock::now(); // start stopwatch
     vectorSort(vectorContestant); // vectorSort() function call, will sort the data elements within the vector (according to ASCII)
@@ -87,67 +87,70 @@ int main()
     auto durationListSort = duration_cast<milliseconds>(endListSort - startListSort); // calculate the time it took
 
     // code block #3, race #3: time how long it takes to insert the value "TESTCODE" into the middle of the vector & list, & into the correct sorted position within the set
-    // this code block uses the .size() member function to ensure that insertion is actually being performed
+    // this code block uses the .size() member function to verify that insertion is actually being performed
     // contestant #1: vector
     cout << "Size of the vector before insertion: " << vectorContestant.size() << endl;
     auto startVectorInsert = high_resolution_clock::now(); // start stopwatch
     vectorInsert(vectorContestant, value); // vectorInsert() function call, will insert the specified value into the middle of the vector
     auto endVectorInsert = high_resolution_clock::now(); // stop stopwatch after function call
-    auto durationVectorInsert = duration_cast<milliseconds>(endVectorInsert - startVectorInsert); // calculate the time it took
+    auto durationVectorInsert = duration_cast<microseconds>(endVectorInsert - startVectorInsert); // calculate the time it took
     cout << "Size of the vector after insertion: " << vectorContestant.size() << endl << endl;
     // contestant #2: list
     cout << "Size of the list before insertion: " << listContestant.size() << endl;
     auto startListInsert = high_resolution_clock::now(); // start stopwatch
     listInsert(listContestant, value); // listInsert() function call, will insert the specified value into the middle of the list
     auto endListInsert = high_resolution_clock::now(); // stop stopwatch after function call
-    auto durationListInsert = duration_cast<milliseconds>(endListInsert - startListInsert); // calculate the time it took
+    auto durationListInsert = duration_cast<microseconds>(endListInsert - startListInsert); // calculate the time it took
     cout << "Size of the list after insertion: " << listContestant.size() << endl << endl;
     // contestant #3: set
     cout << "Size of the set before insertion: " << setContestant.size() << endl;
     auto startSetInsert = high_resolution_clock::now(); // start stopwatch
     setInsert(setContestant, value); // setInsert() function call, will insert the specified value into the correct sorted position within the set
-    auto endsetInsert = high_resolution_clock::now(); // stop stopwatch after function call
-    auto durationsetInsert = duration_cast<milliseconds>(endsetInsert - startSetInsert); // calculate the time it took
+    auto endSetInsert = high_resolution_clock::now(); // stop stopwatch after function call
+    auto durationSetInsert = duration_cast<microseconds>(endSetInsert - startSetInsert); // calculate the time it took
     cout << "Size of the set after insertion: " << setContestant.size() << endl << endl;
 
     // code block #4, race #4: time how long it takes to delete the middle element of each data structure
-    // this code block uses the .size() member function to ensure that deletion is actually being performed
+    // this code block uses the .size() member function to verify that deletion is actually being performed
     // contestant #1: vector
     cout << "Size of the vector before deletion: " << vectorContestant.size() << endl;
     auto startVectorDelete = high_resolution_clock::now(); // start stopwatch
     vectorDelete(vectorContestant); // vectorDelete() function call, will delete the middle element of the vector
     auto endVectorDelete = high_resolution_clock::now(); // stop stopwatch after function call
-    auto durationVectorDelete = duration_cast<milliseconds>(endVectorDelete - startVectorDelete); // calculate the time it took
+    auto durationVectorDelete = duration_cast<microseconds>(endVectorDelete - startVectorDelete); // calculate the time it took
     cout << "Size of the vector after deletion: " << vectorContestant.size() << endl << endl;
     // contestant #2: list
     cout << "Size of the list before deletion: " << listContestant.size() << endl;
     auto startListDelete = high_resolution_clock::now(); // start stopwatch
     listDelete(listContestant); // listDelete() function call, will delete the middle element of the list
     auto endListDelete = high_resolution_clock::now(); // stop stopwatch after function call
-    auto durationListDelete = duration_cast<milliseconds>(endListDelete - startListDelete); // calculate the time it took
+    auto durationListDelete = duration_cast<microseconds>(endListDelete - startListDelete); // calculate the time it took
     cout << "Size of the list after deletion: " << listContestant.size() << endl << endl;
     // contestant #3: set
     cout << "Size of the set before deletion: " << setContestant.size() << endl;
     auto startSetDelete = high_resolution_clock::now(); // start stopwatch
     setDelete(setContestant); // setDelete() function call, will delete the middle element of the set
-    auto endsetDelete = high_resolution_clock::now(); // stop stopwatch after function call
-    auto durationsetDelete = duration_cast<milliseconds>(endsetDelete - startSetDelete); // calculate the time it took
+    auto endSetDelete = high_resolution_clock::now(); // stop stopwatch after function call
+    auto durationSetDelete = duration_cast<microseconds>(endSetDelete - startSetDelete); // calculate the time it took
     cout << "Size of the set after deletion: " << setContestant.size() << endl << endl;
 
-    // output the results of the races
-    // using .count() to reference elapsed milliseconds
-    cout << setw(12) << "Operation" << setw(WIDTH) << "Vector" << setw(WIDTH) << "List" << setw(WIDTH) << "Set" << endl;
-    cout << setw(WIDTH) << "Read" << setw(WIDTH) << durationVectorRead.count() << setw(WIDTH) << durationListRead.count() << setw(WIDTH) << durationsetRead.count() << endl;
+    // output the results of each race
+    // using .count() to reference elapsed milliseconds for read and sort races
+    // using .count() to reference elapsed MICROSECONDS for insert and delete races
+    // I was not getting results (only 0s) when using milliseconds to measure the insert and delete races, so I changed the time measurement to microseconds and this gave me non-zero results
+    // It could be that the insert and delete operations were happening too fast to be measured only in milliseconds
+    cout << setw(WIDTH) << "Operation" << setw(WIDTH) << "Vector" << setw(WIDTH) << "List" << setw(WIDTH) << "Set" << endl;
+    cout << setw(WIDTH) << "Read" << setw(WIDTH) << durationVectorRead.count() << setw(WIDTH) << durationListRead.count() << setw(WIDTH) << durationSetRead.count() << endl;
     cout << setw(WIDTH) << "Sort" << setw(WIDTH) << durationVectorSort.count() << setw(WIDTH) << durationListSort.count() << setw(WIDTH) << durationSetSort << endl; // -1 placeholder for set
-    cout << setw(WIDTH) << "Insert" << setw(WIDTH) << durationVectorInsert.count() << setw(WIDTH) << durationListInsert.count() << setw(WIDTH) << durationsetInsert.count() << endl;
-    cout << setw(WIDTH) << "Delete" << setw(WIDTH) << durationVectorDelete.count() << setw(WIDTH) << durationListDelete.count()<< setw(WIDTH) << durationsetDelete.count() << endl; 
+    cout << setw(WIDTH) << "Insert" << setw(WIDTH) << durationVectorInsert.count() << setw(WIDTH) << durationListInsert.count() << setw(WIDTH) << durationSetInsert.count() << endl;
+    cout << setw(WIDTH) << "Delete" << setw(WIDTH) << durationVectorDelete.count() << setw(WIDTH) << durationListDelete.count()<< setw(WIDTH) << durationSetDelete.count() << endl; 
 
     return 0;
 }
 
 // void vectorRead(const string codesFile, vector<string>& vector) function header
 // DESCRIPTION: this function reads data elements from the input file and adds them to the vector (using .push_back(), which adds elements to the end of the vector)
-// - the function ensures that the input file was successfully opened before proceeding
+// - this function ensures that the input file was successfully opened before proceeding
 // ARGUMENTS: const string codesFile, which represents the input file to read data elements from. Using const to signify that the input file should not be modified
 // - vector<string>& vector, which represents the vector container that will hold string data elements
 // - passing by reference because the vector will be modified
@@ -159,7 +162,7 @@ void vectorRead(const string codesFile, vector<string>& vector)
 
     if (!fin) // check if there was an error when opening the input file
     {
-        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location & try again." << endl;
+        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location & try running the program again." << endl;
         return; // exit function
     }
 
@@ -173,7 +176,7 @@ void vectorRead(const string codesFile, vector<string>& vector)
 
 // void listRead(const string codesFile, list<string>& list) function header
 // DESCRIPTION: this function reads data elements from the input file and adds them to the list (using .push_back(), which adds elements to the end of the list)
-// - the function ensures that the input file was successfully opened before proceeding
+// - this function ensures that the input file was successfully opened before proceeding
 // ARGUMENTS: const string codesFile, which represents the input file to read data elements from. Using const to signify that the input file should not be modified
 // - list<string>& list, which represents the list container that will hold string data elements
 // - passing by reference because the list will be modified
@@ -185,7 +188,7 @@ void listRead(const string codesFile, list<string>& list)
 
     if (!fin) // check if there was an error when opening the input file
     {
-        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location & try again." << endl;
+        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location & try running the program again." << endl;
         return; // exit function
     }
 
@@ -199,8 +202,8 @@ void listRead(const string codesFile, list<string>& list)
 
 // void setRead(const string codesFile, set<string>& set) function header
 // DESCRIPTION: this function reads data elements from the input file and inserts them into the set
-// - using .insert(), which inserts elements into the set. Set ensures that elements are ordered/sorted automatically
-// - the function ensures that the input file was successfully opened before proceeding
+// - using .insert(), which will insert these elements into the set. std::set ensures that elements are ordered/sorted automatically
+// - this function ensures that the input file was successfully opened before proceeding
 // ARGUMENTS: const string codesFile, which represents the input file to read data elements from. Using const to signify that the input file should not be modified
 // - set<string>& set, which represents the set container that will hold string data elements
 // - passing by reference because the set will be modified
@@ -212,7 +215,7 @@ void setRead(const string codesFile, set<string>& set)
 
     if (!fin) // check if there was an error when opening the input file
     {
-        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location & try again." << endl;
+        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location & try running the program again." << endl;
         return; // exit function
     }
 
@@ -232,7 +235,7 @@ void setRead(const string codesFile, set<string>& set)
 // RETURNS: nothing, void function
 void vectorSort(vector<string>& vector)
 {
-    sort(vector.begin(), vector.end()); // using sort member function to sort the contents of the vector from beginning to end
+    sort(vector.begin(), vector.end()); // using sort() member function to sort the contents of the vector from beginning to end
 }
 
 // void listSort(list<string>& list) function header
@@ -254,7 +257,7 @@ void listSort(list<string>& list)
 // RETURNS: nothing, void function
 void vectorInsert(vector<string>& vector, string value)
 {
-    // using C++ "auto" keyword to create an iterator
+    // using C++ 11 "auto" keyword to create an iterator
     // the iterator starts at the beginning (.begin()) of the vector and progresses to the middle element
     // the middle element is calculated by taking the size (.size()) of the vector & dividing it by 2
     // this process causes the iterator to move to the middle position
@@ -271,7 +274,7 @@ void vectorInsert(vector<string>& vector, string value)
 // RETURNS: nothing, void function
 void listInsert(list<string>& list, string value)
 {
-    // using C++ "auto" keyword to create an iterator
+    // using C++ 11 "auto" keyword to create an iterator
     // using .begin() member function to initialize the iterator to start at the beginning of the list
     auto it = list.begin(); 
     // declaration and initialization of a variable named "middle"
@@ -300,13 +303,13 @@ void setInsert(set<string>& set, string value)
 }
 
 // void vectorDelete(vector<string>& vector) function header
-// DESCRIPTION: this function deletes the middle element in the vector
+// DESCRIPTION: this function deletes the middle element of the vector
 // ARGUMENTS: vector<string>& vector, which represents the vector container that holds string data elements
 // - passing by reference because the vector will be modified
 // RETURNS: nothing, void function
 void vectorDelete(vector<string>& vector)
 {
-    // using C++ "auto" keyword to create an iterator
+    // using C++ 11 "auto" keyword to create an iterator
     // the iterator starts at the beginning (.begin()) of the vector and progresses to the middle element
     // the middle element is calculated by taking the size (.size()) of the vector & dividing it by 2
     // this process causes the iterator to move to the middle position
@@ -316,13 +319,13 @@ void vectorDelete(vector<string>& vector)
 }
 
 // void listDelete(list<string>& list) function header
-// DESCRIPTION: this function deletes the middle element in the list
+// DESCRIPTION: this function deletes the middle element of the list
 // ARGUMENTS: list<string>& list, which represents the list container that holds string data elements
 // - passing by reference because the list will be modified
 // RETURNS: nothing, void function
 void listDelete(list<string>& list)
 {
-    // using C++ "auto" keyword to create an iterator
+    // using C++ 11 "auto" keyword to create an iterator
     // using .begin() member function to initialize the iterator to start at the beginning of the list
     auto it = list.begin(); 
     // declaration and initialization of a variable named "middle"
@@ -339,13 +342,13 @@ void listDelete(list<string>& list)
 }
 
 // void setDelete(set<string>& set) function header
-// DESCRIPTION: this function deletes the middle element in the set
+// DESCRIPTION: this function deletes the middle element of the set
 // ARGUMENTS: set<string>& set, which represents the set container that holds string data elements
 // - passing by reference because the set will be modified
 // RETURNS: nothing, void function
 void setDelete(set<string>& set)
 {
-    // using C++ "auto" keyword to create an iterator
+    // using C++ 11 "auto" keyword to create an iterator
     // using .begin() member function to initialize the iterator to start at the beginning of the set
     auto it = set.begin(); 
     // declaration and initialization of a variable named "middle"
